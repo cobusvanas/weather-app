@@ -1,26 +1,25 @@
-import {WeatherType} from "../types/weatherTypes.ts";
-import {mockForecastWeatherData, mockHistoricWeatherData,} from "./mocks/mockCurrentWeatherData.ts";
-import {transformForecastWeatherData, transformHistoricWeatherData} from "../utils/transformWeatherData.ts";
+import {WeatherType} from "../types/weatherTypes";
+import {transformForecastWeatherData, transformHistoricWeatherData} from "../utils/transformWeatherData";
 
 export const getWeatherData = async (
     latitude: number,
     longitude: number,
-    days: number = 3,
+    days: number = 4,
     startDate: string = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
     endDate: string = new Date().toISOString().split('T')[0],
-    mock: boolean = false
 ): Promise<WeatherType> => {
     try {
         const [forecast, historic] = await Promise.all([
-            getForecastWeatherData(latitude, longitude, days, mock),
-            getHistoricWeatherData(latitude, longitude, startDate, endDate, mock),
+            getForecastWeatherData(latitude, longitude, days),
+            getHistoricWeatherData(latitude, longitude, startDate, endDate),
         ]);
-        console.log("Forecast data:", forecast);
-        console.log("Historic data:", historic);
+
         return {
             city: forecast.city,
             stateCode: forecast.stateCode,
             country: forecast.country,
+            lat: forecast.lat,
+            lon: forecast.lon,
             data: [...historic.data, ...forecast.data],
         };
     } catch (error) {
@@ -33,19 +32,15 @@ export const getForecastWeatherData = async (
     latitude: number,
     longitude: number,
     days: number,
-    mock: boolean = false
 ): Promise<WeatherType> => {
-    if (mock) {
-        return transformForecastWeatherData(mockForecastWeatherData)
-    } else {
-        const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
-        const url = `https://api.weatherbit.io/v2.0/forecast/daily?days=${days}&lat=${latitude}&lon=${longitude}&key=${apiKey}`;
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`Error fetching weather data: ${response.statusText}`);
-        }
-        return transformForecastWeatherData(response.json());
+    const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
+    const url = `https://api.weatherbit.io/v2.0/forecast/daily?days=${days}&lat=${latitude}&lon=${longitude}&key=${apiKey}`;
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error(`Error fetching weather data: ${response.statusText}`);
     }
+    const data = await response.json();
+    return transformForecastWeatherData(data);
 }
 
 export const getHistoricWeatherData = async (
@@ -53,17 +48,13 @@ export const getHistoricWeatherData = async (
     longitude: number,
     startDate: string,
     endDate: string,
-    mock: boolean = false
 ): Promise<WeatherType> => {
-    if (mock) {
-        return transformHistoricWeatherData(mockHistoricWeatherData);
-    } else {
-        const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
-        const url = `https://api.weatherbit.io/v2.0/history/hourly?start_date=${startDate}&end_date=${endDate}&lat=${latitude}&lon=${longitude}&key=${apiKey}`;
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`Error fetching weather data: ${response.statusText}`);
-        }
-        return transformHistoricWeatherData(response.json());
+    const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
+    const url = `https://api.weatherbit.io/v2.0/history/hourly?start_date=${startDate}&end_date=${endDate}&lat=${latitude}&lon=${longitude}&key=${apiKey}`;
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error(`Error fetching weather data: ${response.statusText}`);
     }
+    const data = await response.json();
+    return transformHistoricWeatherData(data);
 }

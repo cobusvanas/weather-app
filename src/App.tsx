@@ -1,8 +1,8 @@
-import MainBlock from './components/MainBlock';
+import MainDetails from './components/MainDetails';
 
 const App = () => {
     return (
-        <MainBlock/>
+        <MainDetails/>
     );
 };
 
