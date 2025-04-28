@@ -4,4 +4,8 @@ module.exports = {
     moduleNameMapper: {
         '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
     },
+    testPathIgnorePatterns: [
+        '/node_modules/',
+        '/src/tests/'  // Add this line to ignore Playwright tests
+    ],
 };

@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Box, useBreakpointValue, VStack} from "@chakra-ui/react";
 import {getWeatherData} from "../services/weatherAPI";
 import {WeatherDataType, WeatherType} from "../types/weatherTypes";
@@ -9,7 +9,7 @@ import LoadingSpinner from "./LoadingSpinner";
 import ErrorBlock from "./ErrorBlock";
 import {getCachedWeatherData, setCachedWeatherData} from "../utils/localStorage";
 
-const MainDetails = () => {
+const MainDetails: React.FC = () => {
     const [weatherData, setWeatherData] = useState<WeatherType | null>(null);
     const [location, setLocation] = useState<{ latitude: number; longitude: number } | null>(null);
     const [selectedDay, setSelectedDay] = useState<WeatherDataType>();

@@ -1,5 +1,6 @@
 import {WeatherType} from "../types/weatherTypes";
 import {transformForecastWeatherData, transformHistoricWeatherData} from "../utils/transformWeatherData";
+import {WEATHER_API_KEY} from "../utils/constants";
 
 export const getWeatherData = async (
     latitude: number,
@@ -23,8 +24,13 @@ export const getWeatherData = async (
             data: [...historic.data, ...forecast.data],
         };
     } catch (error) {
-        console.error("Error retrieving weather data:", error);
-        throw error;
+        if (error instanceof Error) {
+            console.error("Error retrieving weather data:", error);
+            throw new Error(`Error retrieving weather data: ${error.message}`);
+        } else {
+            console.error("Error retrieving weather data: Unknown error occurred");
+            throw new Error("Error retrieving weather data: Unknown error occurred");
+        }
     }
 };
 
@@ -33,8 +39,7 @@ export const getForecastWeatherData = async (
     longitude: number,
     days: number,
 ): Promise<WeatherType> => {
-    const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
-    const url = `https://api.weatherbit.io/v2.0/forecast/daily?days=${days}&lat=${latitude}&lon=${longitude}&key=${apiKey}`;
+    const url = `https://api.weatherbit.io/v2.0/forecast/daily?days=${days}&lat=${latitude}&lon=${longitude}&key=${WEATHER_API_KEY}`;
     const response = await fetch(url);
     if (!response.ok) {
         throw new Error(`Error fetching weather data: ${response.statusText}`);
@@ -49,8 +54,7 @@ export const getHistoricWeatherData = async (
     startDate: string,
     endDate: string,
 ): Promise<WeatherType> => {
-    const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
-    const url = `https://api.weatherbit.io/v2.0/history/hourly?start_date=${startDate}&end_date=${endDate}&lat=${latitude}&lon=${longitude}&key=${apiKey}`;
+    const url = `https://api.weatherbit.io/v2.0/history/hourly?start_date=${startDate}&end_date=${endDate}&lat=${latitude}&lon=${longitude}&key=${WEATHER_API_KEY}`;
     const response = await fetch(url);
     if (!response.ok) {
         throw new Error(`Error fetching weather data: ${response.statusText}`);

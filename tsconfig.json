@@ -5,9 +5,15 @@
     { "path": "./tsconfig.node.json" }
   ],
   "compilerOptions": {
-    "types": ["jest","vite/client"],
+    "types": ["jest","vite/client","node","@playwright/test"],
     "lib": ["DOM", "ESNext"],
-    "module": "es2020",
-    "target": "es2020",
+    "target": "es2019",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "@playwright/test": ["node_modules/@playwright/test"]
+    }
   }
 }

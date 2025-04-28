@@ -1,54 +1,63 @@
-# React + TypeScript + Vite
+# Weather App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a simple weather application that allows users to check the current weather conditions for any city based on their current location. The app uses the Weatherbit API to fetch weather data and displays it in a user-friendly format.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Frontend**: React with TypeScript
+- **Build Tool**: Vite
+- **API**: Weatherbit Weather API
+- **Testing**:
+    - Unit tests for weatherAPI service
+    - Playwright for UI end-to-end testing
+- **Styling**: Chakra UI (with responsive design)
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Calls the Weatherbit API to get current weather data
+- Displays the weather data in a user-friendly format
+- Pulls location data from browser
+- Uses geo location to retrieve weather data
+- Makes use of local storage to store API results and prevent redundant API calls
+- Responsive design with both tile and list views
+- Shows detailed weather metrics (temperature, humidity)
+- Historical weather data display
+- Multi-day forecast
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## How to Start the Project
+
+1. Clone the repository
+2. Install dependencies:
+```bash
+npm install
+```
+Create a .env file based on .env.example and add your Weatherbit API key:
+```bash
+VITE_WEATHER_API_KEY=your_api_key_here
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+### Start the development server:
+```bash
+npm run dev
 ```
+
+### To run tests:
+```bash
+npm run test
+```
+
+### To run Playwright tests:
+```bash
+npm run test:e2e
+```
+## How to Setup Weatherbit API
+
+1. Sign up for a free trial account at [Weatherbit.io](https://www.weatherbit.io/)
+2. Navigate to your dashboard and generate an API key
+3. Copy the API key to your `.env` file as `VITE_WEATHER_API_KEY`
+4. The app uses two main endpoints:
+    - Forecast data: `/v2.0/forecast/daily`
+    - Historical data: `/v2.0/history/hourly`
+
+
+
