@@ -1,12 +1,16 @@
 # Weather App
 
 This is a simple weather application that allows users to check the current weather conditions for any city based on their current location. The app uses the Weatherbit API to fetch weather data and displays it in a user-friendly format.
+A demo of the deployed site can be viewed on https://inthing.co.za/
+
+## Design Decisions and Trade-offs
+For detailed information on architectural decisions and their associated trade-offs, please refer to the [Architectural Decision Records](ADR/ADR_DesignDecisions.md).
 
 ## Tech Stack
 
 - **Frontend**: React with TypeScript
 - **Build Tool**: Vite
-- **API**: Weatherbit Weather API
+- **API**: [Weatherbit.io](https://www.weatherbit.io/) Weather API
 - **Testing**:
     - Unit tests for weatherAPI service
     - Playwright for UI end-to-end testing
@@ -23,6 +27,7 @@ This is a simple weather application that allows users to check the current weat
 - Shows detailed weather metrics (temperature, humidity)
 - Historical weather data display
 - Multi-day forecast
+- CI Pipeline with GitHub Actions to check if all tests pass for every PR
 
 ## How to Start the Project
 
@@ -58,6 +63,3 @@ Create a .env file based on .env.example and add your Weatherbit API key:
 4. The app uses two main endpoints:
     - Forecast data: `/v2.0/forecast/daily`
     - Historical data: `/v2.0/history/hourly`
-
-
-

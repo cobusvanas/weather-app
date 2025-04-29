@@ -49,7 +49,7 @@ const WeatherList: React.FC<WeatherListProps> = ({ data, onItemClick }) => {
           >
             <HStack justifyContent="space-between" alignItems="center">
               <VStack align="start">
-                <Text fontSize="lg" fontWeight="bold">
+                <Text fontSize="lg" fontWeight="bold" color="gray.600">
                   {displayDay}
                 </Text>
                 <Text fontSize="md" color="gray.600">
@@ -58,7 +58,7 @@ const WeatherList: React.FC<WeatherListProps> = ({ data, onItemClick }) => {
               </VStack>
               <HStack>
                 <Image src={`icons/${item.icon}.png`} boxSize="50px" />
-                <Text fontSize="2xl" fontWeight="bold">
+                <Text fontSize="2xl" fontWeight="bold" color="gray.600">
                   {Math.round(item.temp)}°C
                 </Text>
               </HStack>

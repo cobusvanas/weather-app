@@ -41,11 +41,13 @@ const WeatherTiles: React.FC<WeatherTileProps> = ({ data, onClick }) => {
             transition={{ duration: 0.3, delay: index * 0.1 }}
           >
             <VStack>
-              <Text fontSize={fontSize} fontWeight="bold">
+              <Text fontSize={fontSize} fontWeight="bold" color="gray.600">
                 {displayDay}
               </Text>
               <Image src={`icons/${item.icon}.png`} />
-              <Text fontSize={fontSize}>{Math.round(item.temp)}°C</Text>
+              <Text fontSize={fontSize} color="gray.600">
+                {Math.round(item.temp)}°C
+              </Text>
             </VStack>
           </MotionBox>
         );
