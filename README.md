@@ -29,26 +29,26 @@ This is a simple weather application that allows users to check the current weat
 1. Clone the repository
 2. Install dependencies:
 ```bash
-npm install
+  npm install
 ```
 Create a .env file based on .env.example and add your Weatherbit API key:
 ```bash
-VITE_WEATHER_API_KEY=your_api_key_here
+  VITE_WEATHER_API_KEY=your_api_key_here
 ```
 
 ### Start the development server:
 ```bash
-npm run dev
+  npm run dev
 ```
 
 ### To run tests:
 ```bash
-npm run test
+  npm run test
 ```
 
 ### To run Playwright tests:
 ```bash
-npm run test:e2e
+  npm run test:e2e
 ```
 ## How to Setup Weatherbit API
 
