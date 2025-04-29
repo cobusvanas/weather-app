@@ -1,9 +1,7 @@
 import MainDetails from './components/MainDetails';
 
 const App = () => {
-    return (
-        <MainDetails/>
-    );
+  return <MainDetails />;
 };
 
 export default App;

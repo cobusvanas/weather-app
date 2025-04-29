@@ -1,7 +1,3 @@
-const {
-    VITE_WEATHER_API_KEY: WEATHER_API_KEY,
-} = import.meta.env;
+const { VITE_WEATHER_API_KEY: WEATHER_API_KEY } = import.meta.env;
 
-export {
-    WEATHER_API_KEY
-};
+export { WEATHER_API_KEY };
