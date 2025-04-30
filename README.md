@@ -55,6 +55,8 @@ Create a .env file based on .env.example and add your Weatherbit API key:
 ```bash
   npm run test:e2e
 ```
+Note: For Playwright tests to work correctly, ensure the VITE_WEATHER_API_KEY environment variable is set in your .env file.
+
 ## How to Setup Weatherbit API
 
 1. Sign up for a free trial account at [Weatherbit.io](https://www.weatherbit.io/)

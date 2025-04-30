@@ -5,7 +5,7 @@
 - Implemented weatherbit.io API for fetching weather data
 
 **Reasoning:**
-- Weatherbit.io offers valuable features in their free tier (historical data, multi-day forecasts)
+- Weatherbit.io offers valuable features in their free trial (historical data, multi-day forecasts)
 - Provides resources to customize the user experience
 - Well-documented API with straightforward implementation
 - Reliable location based data accuracy for weather forecasting
